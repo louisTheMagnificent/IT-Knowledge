@@ -48,7 +48,7 @@ Also at every node return the current path sum (maximum of node.val and node.val
 
 In case of null nodes at the end, 0 will be returned as the current pathSum.
 
---
+---
 ## Solution:  
 ```Java
 /*

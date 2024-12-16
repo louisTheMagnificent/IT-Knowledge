@@ -3,26 +3,28 @@
 Given a binary tree, the task is to find the maximum path sum. The path may start and end at any node in the tree.
 
 Example 1:
-
+```
 Input:   
      10  
     /  \  
    2   -25  
   / \  /  \  
- 20 1  3  4  
+ 20 1  3  4
+```
 Output: 32  
 
 Explanation: Path in the given tree goes
 like 10 , 2 , 20 which gives the max
 sum as 32.
 Example 2:
-
+```
 Input:  
      10  
    /    \  
   2      5  
           \  
-          -2  
+          -2
+```
 Output: 17  
 
 Explanation: Path in the given tree goes

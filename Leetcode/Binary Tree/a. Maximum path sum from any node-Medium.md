@@ -10,8 +10,8 @@ Input:
    2   -25  
   / \  /  \  
  20 1  3  4
+Output: 32
 ```
-Output: 32  
 
 Explanation: Path in the given tree goes
 like 10 , 2 , 20 which gives the max
@@ -24,8 +24,8 @@ Input:
   2      5  
           \  
           -2
+Output: 17
 ```
-Output: 17  
 
 Explanation: Path in the given tree goes
 like 2 , 10 , 5 which gives the max sum

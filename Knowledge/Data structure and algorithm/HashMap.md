@@ -36,3 +36,6 @@ Double hashing effectively reduces collisions and improves the performance of ha
 
 ## Rehashing  
 Generally speaking, when the load factor of the hash table exceeds a certain threshold (such as 0.7 or 0.75), rehashing may be required. The new size of the hash table is typically twice the original size or a prime number close to twice that. Rehash each element in the old hash table and insert it into the new table. It should be noted that since the size of the hash table has changed, the original hash value is no longer applicable and the hash value of each element must be recalculated based on the new table size. Thus, rehashing consumes a lot of time. 
+
+## Consistent Hashing
+Consistent hashing is a good way to deal with the tremendous time cost of rehashing. 

@@ -2,8 +2,8 @@
 ---
 ## Construction  
 Hashmap is used to store key-value pairs to provide fast data insertion, search, and deletion operations. First we set a 
-hash function to map the key to an integer value in a fixed range, called a hash code. Then we convert the hash code into 
-a valid array index (using Remainder Operation and each position in the array is called bucket). Thus we can access the value based on the key directly.
+function to map the key to an integer value in a fixed range, called a hash code. Then we convert the hash code into 
+a valid array index (using Remainder Operation and each position in the array is called bucket), called hash function. Thus we can access the value based on the key directly.
 
 ---
 ## Hash collision  

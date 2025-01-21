@@ -3,13 +3,13 @@
 https://kamacoder.com/problempage.php?pid=1046
 
 ---
-## Thought:
+## Thought 1:
 We use md dp to do it.
 
 https://programmercarl.com/背包理论基础01背包-1.html#思路
 
 ---
-## Solution:
+## Solution 1:
 ```Java
 import java.util.Scanner;
 
@@ -56,3 +56,44 @@ public class Main {
 ```
 Time complexity: O(mn)  
 Space complexity: O(mn)
+
+---
+## Thought 2:
+
+https://programmercarl.com/背包理论基础01背包-2.html#其他语言版本
+
+---
+## Solution 2:
+```Java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int bagweight = scanner.nextInt();
+
+        int[] weight = new int[n];
+        int[] value = new int[n];
+
+        for (int i = 0; i < n; ++i) {
+            weight[i] = scanner.nextInt();
+        }
+        for (int j = 0; j < n; ++j) {
+            value[j] = scanner.nextInt();
+        }
+        
+        int[] dp = new int[bagweight + 1];
+        
+        
+        for(int i = 0; i < n; i++){
+            for(int j = bagweight; j >= weight[i]; j--){
+                dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
+            }
+        }
+        System.out.println(dp[bagweight]);
+    }
+}
+```
+Time complexity: O(mn)  
+Space complexity: O(n)

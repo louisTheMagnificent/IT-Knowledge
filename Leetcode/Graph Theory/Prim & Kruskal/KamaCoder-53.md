@@ -78,3 +78,87 @@ https://programmercarl.com/kamacoder/0053.寻宝-Kruskal.html#解题思路
 ---
 ## Solution 2:
 ```Java
+import java.util.*;
+
+class Disjoint{
+    
+    private int[] father;
+    
+    public Disjoint(int n){
+        this.father = new int[n];
+        for(int i = 0; i < n; i++){
+            father[i] = i;
+        }
+    }
+    
+    public int find(int i){
+        return i == father[i] ? i : (father[i] = find(father[i]));
+    }
+    
+    public void join(int u, int v){
+        u = find(u);
+        v = find(v);
+        if(u == v) return;
+        father[v] = u;
+        return;
+    }
+    
+    public boolean isSame(int u, int v){
+        u = find(u);
+        v = find(v);
+        return u == v ? true : false;
+    }
+}
+
+class Edge{
+    int left;
+    int right;
+    int distance;
+    
+    public Edge(int left, int right, int distance){
+        this.left = left;
+        this.right = right;
+        this.distance = distance;
+    }
+}
+
+class Main{
+    
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int v = scan.nextInt();
+        int e = scan.nextInt();
+        
+        List<Edge> edges = new ArrayList<>();
+        Disjoint disjoint = new Disjoint(v + 1);
+
+        for(int i = 0; i < e; i++){
+            int x = scan.nextInt();
+            int y = scan.nextInt();
+            int k = scan.nextInt();
+            
+            edges.add(new Edge(x, y, k));
+        }
+        
+        int result = 0;
+        
+        edges.sort(Comparator.comparingInt(edge -> edge.distance));
+        
+        for(int i = 0; i < e; i++){
+            Edge curr = edges.get(i);
+            int left = curr.left;
+            int right = curr.right;
+            if(!disjoint.isSame(left, right)){
+                result += curr.distance;
+                disjoint.join(left, right);
+            }
+            else continue;
+        }
+        
+        System.out.println(result);
+        scan.close();
+    }
+}
+```
+Time complexity: O(nlogn)  
+Space complexity: O(m + n)

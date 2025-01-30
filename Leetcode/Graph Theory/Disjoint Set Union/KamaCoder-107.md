@@ -67,5 +67,5 @@ class Main{
     } 
 }
 ```
-Time complexity: O(n)  
+Time complexity: O(n + m)  
 Space complexity: O(n)

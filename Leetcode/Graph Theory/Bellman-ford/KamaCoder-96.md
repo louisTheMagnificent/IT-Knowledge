@@ -83,3 +83,79 @@ https://programmercarl.com/kamacoder/0096.城市间货物运输III.html#思路v
 ---
 ## Solution 2:
 ```Java
+import java.util.*;
+
+class Edge{
+    
+    public final int to;
+    public final int val;
+    
+    public Edge(int to, int val){
+        this.to = to;
+        this.val = val;
+    }
+}
+
+class Main{
+    
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int m = scan.nextInt();
+        
+        List<List<Edge>> adjList = new ArrayList<>();
+        
+        for(int i = 0; i <= n; i++){
+            adjList.add(new ArrayList<>());
+        }
+        
+        
+        for(int i = 0; i < m; i++){
+            int start = scan.nextInt();
+            int end = scan.nextInt();
+            int value = scan.nextInt();
+            adjList.get(start).add(new Edge(end, value));
+        }
+        
+        
+        int start = scan.nextInt();
+        int end = scan.nextInt();
+        int k = scan.nextInt();
+        
+        int[] minDist = new int[n + 1];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        minDist[start] = 0;
+        
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(start);
+        
+        
+        while(k + 1 > 0 && !queue.isEmpty()){
+            
+            int currSize = queue.size();
+            int[] prevMinDist = Arrays.copyOf(minDist, n + 1);
+            boolean[] visited = new boolean[n + 1];
+            
+            while(currSize-- > 0){
+                int curr = queue.poll();
+                for(Edge edge : adjList.get(curr)){
+                    if(minDist[edge.to] > prevMinDist[curr] + edge.val){
+                        minDist[edge.to] = prevMinDist[curr] + edge.val;
+                        if(!visited[edge.to]){
+                            queue.offer(edge.to);
+                            visited[edge.to] = true;
+                        }
+                    }
+                }
+            }
+            k--;
+        }
+        
+        System.out.println(minDist[end] == Integer.MAX_VALUE ? "unreachable" : minDist[end]);
+        
+        scan.close();
+    }
+}
+```
+Time complexity: O(k * H) (h < e)  
+Space complexity: O(n + m)

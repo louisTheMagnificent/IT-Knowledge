@@ -107,23 +107,23 @@ class Main{
         Arrays.fill(minDist, Integer.MAX_VALUE);
         minDist[1] = 0;
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        pq.add(1);
+        Queue<Integer> q = new ArrayDeque<>();
+        q.add(1);
         
         boolean[] isInQueue = new boolean[n + 1];
         
-        while(!pq.isEmpty()){
-            int currNode = pq.poll();
+        while(!q.isEmpty()){
+            int currNode = q.poll();
             
             for(Edge edge : adjList.get(currNode)){
                 if(minDist[edge.to] > minDist[currNode] + edge.val){
                     minDist[edge.to] = minDist[currNode] + edge.val;
+                    if(!isInQueue[edge.to]){
+                        q.add(edge.to);
+                        isInQueue[edge.to] = true;
+                    }
                 }
                 
-                if(!isInQueue[edge.to]){
-                    pq.add(edge.to);
-                    isInQueue[edge.to] = true;
-                } 
             }
             
             isInQueue[currNode] = false;

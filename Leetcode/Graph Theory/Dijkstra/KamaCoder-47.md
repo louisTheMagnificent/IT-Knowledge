@@ -88,12 +88,19 @@ class Edge{
 }
 
 class Pair{
-    int first;
-    int second;
+    public final int first;
+    public final int second;
     
     public Pair(int first, int second){
         this.first = first;
         this.second = second;
+    }
+}
+
+class MyComparison implements Comparator<Pair> {
+    @Override
+    public int compare(Pair lhs, Pair rhs) {
+        return Integer.compare(lhs.second, rhs.second);
     }
 }
 
@@ -118,9 +125,7 @@ class Main{
             adjList.get(x).add(new Edge(y, z));
         }
         
-        PriorityQueue<Pair> pq = new PriorityQueue<>(
-            (a, b) -> Integer.compare(a.second, b.second)
-        );
+        PriorityQueue<Pair> pq = new PriorityQueue<>(new MyComparison());
         
         boolean[] visited = new boolean[n + 1];
         int[] minDist = new int[n + 1];
@@ -134,18 +139,12 @@ class Main{
             
             if(visited[curr.first]) continue;
             
-            List<Edge> nextNodes = adjList.get(curr.first);
-            
             visited[curr.first] = true;
-            int second = curr.second;
             
-            for(Edge edge : nextNodes){
-                int to = edge.to;
-                int val = edge.val;
-                
-                if(!visited[to] && second + val < minDist[to]){
-                    minDist[to] = second + val;
-                    pq.add(new Pair(to, minDist[to]));
+            for(Edge edge : adjList.get(curr.first)){
+                if(!visited[edge.to] && minDist[curr.first] + edge.val < minDist[edge.to]){
+                    minDist[edge.to] = minDist[curr.first] + edge.val;
+                    pq.add(new Pair(edge.to, minDist[edge.to]));
                 }
             }
         }
